@@ -1,5 +1,12 @@
-import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { useDropzone } from "react-dropzone";
+import React, { useCallback, useEffect } from "react";
+
+//icons
+import { MdDone } from "react-icons/md";
+import { RxCross2 } from "react-icons/rx";
+import { FaRegFileVideo } from "react-icons/fa";
 
 //images
 import file_video from "../assets/video.png";
@@ -7,7 +14,37 @@ import file_video from "../assets/video.png";
 //components
 import Background from "../components/background";
 
+//actions
+import { addFile } from "../store/reducers/file";
+
 const Upload = () => {
+  //configs
+  const dispatch = useDispatch();
+
+  //local data
+  const [file, setFile] = React.useState(null);
+  const [percent, setPercent] = React.useState(0);
+
+  const onDrop = useCallback((acceptedFiles) => {
+    setFile(acceptedFiles);
+    dispatch(addFile(acceptedFiles));
+    handleProgress();
+  }, []);
+
+  const handleProgress = () => {
+    setInterval(() => {
+      setPercent((prev) => {
+        if (prev < 100) {
+          return prev + 1;
+        } else {
+          return prev;
+        }
+      });
+    }, 50);
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+
   return (
     <Background>
       <Container>
@@ -16,9 +53,35 @@ const Upload = () => {
             <p className="title">Upload video</p>
             <p className="para">Click or drag and drop your video file</p>
           </div>
-          <div className="upload">
-            <img src={file_video} alt="file_video" />
-          </div>
+          {file ? (
+            <div className="about">
+              <div className="file">
+                <FaRegFileVideo className="icon" />
+                <div className="loader">
+                  <div className="top">
+                    <p>{file[0]?.name}</p>
+                    <p>{percent}%</p>
+                  </div>
+                  <div className="down">
+                    <progress value={percent} max={100} />
+                  </div>
+                </div>
+              </div>
+              <div className="controls">
+                <div className="cancel">
+                  <RxCross2 className="icon" />
+                </div>
+                <div className="approve">
+                  <MdDone className="icon" />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="upload" {...getRootProps()}>
+              <input {...getInputProps()} accept="video/*" />
+              <img src={file_video} alt="file_video" />
+            </div>
+          )}
         </div>
       </Container>
     </Background>
@@ -72,9 +135,107 @@ const Container = styled.div`
       }
     }
 
+    .about {
+      width: 60%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .file {
+        width: 100%;
+        height: 50px;
+        margin: 0 0 50px 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .icon {
+          font-size: 3em;
+          color: var(--bright);
+        }
+
+        .loader {
+          width: 85%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+
+          .top {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            p {
+              color: var(--white);
+            }
+          }
+
+          .down {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+
+            progress {
+              width: 100%;
+              border: none;
+              border-radius: 50px;
+
+              ::-webkit-progress-bar {
+                background: var(--white);
+              }
+
+              ::-webkit-progress-value {
+                background: var(--bright);
+              }
+            }
+          }
+        }
+      }
+
+      .controls {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        > div {
+          width: 80px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 5px;
+          cursor: pointer;
+
+          .icon {
+            font-size: 1.5em;
+            color: var(--white);
+          }
+        }
+
+        .cancel {
+          border: 1px solid var(--bright);
+        }
+
+        .approve {
+          background: var(--bright);
+        }
+      }
+    }
+
     .upload {
       width: 60%;
       height: 300px;
+      position: relative;
       border-radius: 10px;
       background: var(--dark);
       display: flex;
