@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import { useDropzone } from "react-dropzone";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 
 //icons
 import { MdDone } from "react-icons/md";
@@ -20,6 +21,7 @@ import { addFile } from "../store/reducers/file";
 const Upload = () => {
   //configs
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   //local data
   const [file, setFile] = React.useState(null);
@@ -27,7 +29,6 @@ const Upload = () => {
 
   const onDrop = useCallback((acceptedFiles) => {
     setFile(acceptedFiles);
-    dispatch(addFile(acceptedFiles));
     handleProgress();
   }, []);
 
@@ -41,6 +42,18 @@ const Upload = () => {
         }
       });
     }, 50);
+  };
+
+  const deleteFile = () => {
+    setFile(null);
+    setPercent(0);
+  };
+
+  const approveFile = () => {
+    if (percent === 100) {
+      dispatch(addFile(file));
+      navigate("/video");
+    }
   };
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -68,10 +81,10 @@ const Upload = () => {
                 </div>
               </div>
               <div className="controls">
-                <div className="cancel">
+                <div className="cancel" onClick={deleteFile}>
                   <RxCross2 className="icon" />
                 </div>
-                <div className="approve">
+                <div className="approve" onClick={approveFile}>
                   <MdDone className="icon" />
                 </div>
               </div>

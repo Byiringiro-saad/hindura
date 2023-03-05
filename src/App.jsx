@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Splash from "./pages/splash";
 
 //pages
+import Video from "./pages/video";
 import Upload from "./pages/upload";
+import Splash from "./pages/splash";
 
 function App() {
   const [showSplash, setShowSplash] = React.useState(true);
@@ -22,6 +23,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Upload />} />
+            <Route path="/video" element={<Video />} />
           </Routes>
         </Router>
       )}
