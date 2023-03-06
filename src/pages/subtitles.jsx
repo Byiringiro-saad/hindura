@@ -5,14 +5,14 @@ import React, { useEffect, useRef, useState } from "react";
 
 //icons
 import { MdEditNote } from "react-icons/md";
+import { TbFileExport } from "react-icons/tb";
 import { IoMdVolumeHigh } from "react-icons/io";
-import { RiListSettingsLine } from "react-icons/ri";
-import { BsPlayCircleFill, BsPauseFill } from "react-icons/bs";
+import { BsPlayCircleFill, BsPauseFill, BsShareFill } from "react-icons/bs";
 
 //components
 import Background from "../components/background";
 
-const Video = () => {
+const Subtitles = () => {
   //configs
   const videoRef = useRef(null);
   const navigate = useNavigate();
@@ -70,6 +70,12 @@ const Video = () => {
       <Container>
         <div className="video">
           <video id="video" src={video} ref={videoRef}></video>
+          <div className="subtitles">
+            <p>
+              Donec vitae mi vulputate, suscipit urna in, malesuada nisl.
+              Pellentesque laoreet malesuada nisl. Pellentesque laoreet{" "}
+            </p>
+          </div>
           <div className="controlls">
             {playing ? (
               <BsPauseFill className="icon" onClick={pauseVideo} />
@@ -97,9 +103,15 @@ const Video = () => {
             <MdEditNote className="icon" />
             <p>Edit subtitles</p>
           </div>
-          <div className="button" onClick={goToGenerating}>
-            <RiListSettingsLine className="icon" />
-            <p>Generate subtitles</p>
+          <div className="left">
+            <div className="button">
+              <TbFileExport className="icon" />
+              <p>Export</p>
+            </div>
+            <div className="another">
+              <BsShareFill className="icon" />
+              <p>Share</p>
+            </div>
           </div>
         </div>
       </Container>
@@ -126,6 +138,24 @@ const Container = styled.div`
     video {
       width: 100%;
       border-radius: 10px;
+    }
+
+    .subtitles {
+      width: 80%;
+      height: 50px;
+      background: #170707c3;
+      position: absolute;
+      bottom: 80px;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+
+      p {
+        color: var(--white);
+      }
     }
 
     .controlls {
@@ -187,6 +217,34 @@ const Container = styled.div`
     align-items: center;
     justify-content: space-between;
 
+    .left {
+      width: auto;
+      height: auto;
+      display: flex;
+      flex-direction: row;
+
+      .another {
+        padding: 15px 25px;
+        margin: 0 0 0 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        cursor: pointer;
+
+        .icon {
+          font-size: 1.3em;
+          margin: 0 10px 0 0;
+          color: var(--white);
+        }
+
+        p {
+          color: var(--white);
+        }
+      }
+    }
+
     .button {
       padding: 15px 25px;
       display: flex;
@@ -210,4 +268,4 @@ const Container = styled.div`
   }
 `;
 
-export default Video;
+export default Subtitles;
