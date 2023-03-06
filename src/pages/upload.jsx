@@ -202,10 +202,12 @@ const Container = styled.div`
 
               ::-webkit-progress-bar {
                 background: var(--white);
+                border-radius: 10px;
               }
 
               ::-webkit-progress-value {
                 background: var(--bright);
+                border-radius: 10px;
               }
             }
           }
