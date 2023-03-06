@@ -120,6 +120,7 @@ const Container = styled.div`
     align-items: center;
 
     video {
+      width: 100%;
       border-radius: 10px;
     }
 
@@ -174,7 +175,7 @@ const Container = styled.div`
   }
 
   .buttons {
-    width: 95%;
+    width: 80%;
     height: 40px;
     display: flex;
     margin: 30px 0 0 0;
@@ -190,6 +191,7 @@ const Container = styled.div`
       justify-content: center;
       border-radius: 5px;
       background: var(--bright);
+      cursor: pointer;
 
       .icon {
         font-size: 1.3em;

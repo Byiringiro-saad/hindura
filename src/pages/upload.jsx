@@ -72,7 +72,7 @@ const Upload = () => {
                 <FaRegFileVideo className="icon" />
                 <div className="loader">
                   <div className="top">
-                    <p>{file[0]?.name}</p>
+                    <p className="name">{file[0]?.name}</p>
                     <p>{percent}%</p>
                   </div>
                   <div className="down">
@@ -185,6 +185,13 @@ const Container = styled.div`
 
             p {
               color: var(--white);
+            }
+
+            p.name {
+              width: 50%;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
             }
           }
 
