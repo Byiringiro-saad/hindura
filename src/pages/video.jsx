@@ -177,9 +177,30 @@ const Container = styled.div`
     width: 95%;
     height: 40px;
     display: flex;
+    margin: 30px 0 0 0;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
+    .button {
+      padding: 15px 25px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      background: var(--bright);
+
+      .icon {
+        font-size: 1.3em;
+        margin: 0 10px 0 0;
+        color: var(--white);
+      }
+
+      p {
+        color: var(--white);
+      }
+    }
   }
 `;
 
