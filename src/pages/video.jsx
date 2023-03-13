@@ -97,10 +97,10 @@ const Video = () => {
             <RiListSettingsLine className="icon" />
             <p>Generate subtitles</p>
           </div>
-          <div className="button">
+          {/* <div className="button">
             <MdEditNote className="icon" />
             <p>Edit subtitles</p>
-          </div>
+          </div> */}
         </div>
       </Container>
     </Background>
@@ -185,7 +185,7 @@ const Container = styled.div`
     margin: 30px 0 0 0;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
 
     .button {
       padding: 15px 25px;
@@ -196,6 +196,11 @@ const Container = styled.div`
       border-radius: 5px;
       background: var(--bright);
       cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      :hover {
+        background: var(--bright);
+      }
 
       .icon {
         font-size: 1.3em;

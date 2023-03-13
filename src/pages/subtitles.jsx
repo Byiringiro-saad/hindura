@@ -19,6 +19,9 @@ const Subtitles = () => {
 
   //local data
   const [video, setVideo] = useState(null);
+  const [chunk, setChunk] = useState(
+    "Donec vitae mi vulputate, suscipit urna in, malesuada nisl. Pellentesque laoreet malesuada nisl. Pellentesque laoree"
+  );
   const [progress, setProgress] = useState(0);
   const [videoTime, setVideoTime] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -38,8 +41,12 @@ const Subtitles = () => {
     videoRef.current.pause();
   };
 
-  const goToGenerating = () => {
-    navigate("/generating");
+  const editChunk = (e) => {
+    setChunk(e.target.value);
+  };
+
+  const goToEdit = () => {
+    navigate("/edit");
   };
 
   window.setInterval(() => {
@@ -93,13 +100,10 @@ const Subtitles = () => {
           </div>
         </div>
         <div className="subtitles">
-          <p>
-            Donec vitae mi vulputate, suscipit urna in, malesuada nisl.
-            Pellentesque laoreet malesuada nisl. Pellentesque laoree
-          </p>
+          <input type="text" value={chunk} onChange={editChunk} />
         </div>
         <div className="buttons">
-          <div className="button">
+          <div className="button" onClick={goToEdit}>
             <MdEditNote className="icon" />
             <p>Edit subtitles</p>
           </div>
@@ -203,8 +207,15 @@ const Container = styled.div`
     background: var(--box);
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.5);
 
-    p {
+    input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
       color: var(--white);
+      font-size: 1.2em;
+      outline: none;
+      text-align: center;
     }
   }
 
@@ -257,7 +268,12 @@ const Container = styled.div`
       justify-content: center;
       border-radius: 5px;
       background: var(--bright);
+      transition: all 0.2s ease-in-out;
       cursor: pointer;
+
+      :hover {
+        background: #f85d5d;
+      }
 
       .icon {
         font-size: 1.3em;
