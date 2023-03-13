@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 //pages
+import Edit from "./pages/edit";
 import Video from "./pages/video";
 import Upload from "./pages/upload";
 import Splash from "./pages/splash";
@@ -28,9 +29,10 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Upload />} />
+            <Route path="/edit" element={<Edit />} />
             <Route path="/video" element={<Video />} />
-            <Route path="/subtitles" element={<Subtitles />} />
             <Route path="/generating" element={<Loader />} />
+            <Route path="/subtitles" element={<Subtitles />} />
           </Routes>
         </Router>
       )}

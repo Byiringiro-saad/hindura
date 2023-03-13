@@ -93,13 +93,13 @@ const Video = () => {
           </div>
         </div>
         <div className="buttons">
-          <div className="button">
-            <MdEditNote className="icon" />
-            <p>Edit subtitles</p>
-          </div>
           <div className="button" onClick={goToGenerating}>
             <RiListSettingsLine className="icon" />
             <p>Generate subtitles</p>
+          </div>
+          <div className="button">
+            <MdEditNote className="icon" />
+            <p>Edit subtitles</p>
           </div>
         </div>
       </Container>

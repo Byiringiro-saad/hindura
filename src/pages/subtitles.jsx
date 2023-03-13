@@ -70,12 +70,6 @@ const Subtitles = () => {
       <Container>
         <div className="video">
           <video id="video" src={video} ref={videoRef}></video>
-          <div className="subtitles">
-            <p>
-              Donec vitae mi vulputate, suscipit urna in, malesuada nisl.
-              Pellentesque laoreet malesuada nisl. Pellentesque laoreet{" "}
-            </p>
-          </div>
           <div className="controlls">
             {playing ? (
               <BsPauseFill className="icon" onClick={pauseVideo} />
@@ -98,19 +92,25 @@ const Subtitles = () => {
             <IoMdVolumeHigh className="icon" />
           </div>
         </div>
+        <div className="subtitles">
+          <p>
+            Donec vitae mi vulputate, suscipit urna in, malesuada nisl.
+            Pellentesque laoreet malesuada nisl. Pellentesque laoree
+          </p>
+        </div>
         <div className="buttons">
           <div className="button">
             <MdEditNote className="icon" />
             <p>Edit subtitles</p>
           </div>
           <div className="left">
-            <div className="button">
-              <TbFileExport className="icon" />
-              <p>Export</p>
-            </div>
             <div className="another">
               <BsShareFill className="icon" />
               <p>Share</p>
+            </div>
+            <div className="button">
+              <TbFileExport className="icon" />
+              <p>Export</p>
             </div>
           </div>
         </div>
@@ -138,24 +138,6 @@ const Container = styled.div`
     video {
       width: 100%;
       border-radius: 10px;
-    }
-
-    .subtitles {
-      width: 80%;
-      height: 50px;
-      background: #170707c3;
-      position: absolute;
-      bottom: 80px;
-      border-radius: 5px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-
-      p {
-        color: var(--white);
-      }
     }
 
     .controlls {
@@ -208,11 +190,28 @@ const Container = styled.div`
     }
   }
 
+  .subtitles {
+    width: 80%;
+    height: 70px;
+    margin: 20px 0;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: var(--box);
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.5);
+
+    p {
+      color: var(--white);
+    }
+  }
+
   .buttons {
     width: 80%;
     height: 40px;
     display: flex;
-    margin: 30px 0 0 0;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -225,13 +224,18 @@ const Container = styled.div`
 
       .another {
         padding: 15px 25px;
-        margin: 0 0 0 20px;
+        margin: 0 20px 0 0;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
         border-radius: 5px;
         cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        :hover {
+          background: var(--bright);
+        }
 
         .icon {
           font-size: 1.3em;
