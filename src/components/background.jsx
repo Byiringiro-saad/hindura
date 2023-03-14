@@ -13,7 +13,7 @@ const Background = (props) => {
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,7 +33,7 @@ const Container = styled.div`
     }
 
     @media only screen and (max-width: 1200px) {
-      width: 90%;
+      width: 95%;
     }
   }
 

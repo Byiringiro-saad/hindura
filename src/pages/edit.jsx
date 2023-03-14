@@ -174,6 +174,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 
+  @media only screen and (max-width: 1024px) {
+    padding: 20px 0;
+  }
+
   .top {
     width: 100%;
     height: auto;
@@ -182,6 +186,7 @@ const Container = styled.div`
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
+    z-index: 1000;
 
     .buttons {
       width: 12%;
@@ -209,6 +214,10 @@ const Container = styled.div`
         cursor: pointer;
         transition: all 0.2s ease-in-out;
 
+        @media only screen and (max-width: 1024px) {
+          height: 35px;
+        }
+
         :hover {
           background: #f85d5d;
         }
@@ -226,6 +235,10 @@ const Container = styled.div`
 
     .video {
       width: 85%;
+
+      @media only screen and (max-width: 1024px) {
+        width: 80%;
+      }
 
       video {
         width: 100%;

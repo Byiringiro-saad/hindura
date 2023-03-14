@@ -102,7 +102,7 @@ const Upload = () => {
 };
 
 const Container = styled.div`
-  height: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,7 +112,7 @@ const Container = styled.div`
   }
 
   @media only screen and (max-width: 1200px) {
-    width: 90%;
+    width: 95%;
   }
 
   .container {
@@ -126,6 +126,11 @@ const Container = styled.div`
     border-radius: 10px;
     background: var(--box);
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.5);
+
+    @media only screen and (max-width: 1024px) {
+      width: 600px;
+      padding: 30px 0;
+    }
 
     .header {
       width: 100%;
@@ -141,6 +146,10 @@ const Container = styled.div`
         font-weight: 800;
         color: var(--white);
         margin: 0 0 5px 0;
+
+        @media only screen and (max-width: 1024px) {
+          font-size: 1.5em;
+        }
       }
 
       p.para {
@@ -154,6 +163,10 @@ const Container = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
+
+      @media only screen and (max-width: 1024px) {
+        width: 70%;
+      }
 
       .file {
         width: 100%;

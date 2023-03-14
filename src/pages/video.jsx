@@ -109,7 +109,7 @@ const Video = () => {
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -122,6 +122,10 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media only screen and (max-width: 1024px) {
+      width: 80%;
+    }
 
     video {
       width: 100%;
@@ -141,10 +145,18 @@ const Container = styled.div`
       justify-content: space-between;
       padding: 0 20px;
 
+      @media only screen and (max-width: 1024px) {
+        height: 40px;
+      }
+
       .icon {
         cursor: pointer;
         font-size: 1.5em;
         color: var(--white);
+
+        @media only screen and (max-width: 1024px) {
+          font-size: 1.3em;
+        }
       }
 
       .progress {
@@ -197,6 +209,10 @@ const Container = styled.div`
       background: var(--bright);
       cursor: pointer;
       transition: all 0.2s ease-in-out;
+
+      @media only screen and (max-width: 1024px) {
+        padding: 10px 15px;
+      }
 
       :hover {
         background: var(--bright);

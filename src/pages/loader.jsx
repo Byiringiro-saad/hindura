@@ -45,7 +45,7 @@ const Loader = () => {
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,6 +53,10 @@ const Container = styled.div`
 
   .loader {
     width: 45%;
+
+    @media only screen and (max-width: 1024px) {
+      width: 30%;
+    }
   }
 
   p {

@@ -25,7 +25,7 @@ const Splash = () => {
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,6 +33,10 @@ const Container = styled.div`
 
   img {
     width: 300px;
+
+    @media only screen and (max-width: 1024px) {
+      width: 200px;
+    }
   }
 
   .para {
@@ -48,6 +52,10 @@ const Container = styled.div`
       margin: 20px 0 0 6px;
       font-weight: 800;
       color: var(--bright);
+
+      @media only screen and (max-width: 1024px) {
+        font-size: 2em;
+      }
     }
 
     p.welcome {
@@ -57,6 +65,10 @@ const Container = styled.div`
       color: var(--dark);
       position: relative;
       -webkit-text-stroke: 0.4px var(--white);
+
+      @media only screen and (max-width: 1024px) {
+        font-size: 2em;
+      }
 
       ::before {
         content: attr(data-text);
