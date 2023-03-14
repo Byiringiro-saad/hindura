@@ -140,7 +140,11 @@ const Container = styled.div`
     align-items: center;
 
     @media only screen and (max-width: 1024px) {
-      width: 75%;
+      width: 80%;
+    }
+
+    @media only screen and (max-width: 768px) {
+      width: 100%;
     }
 
     video {
@@ -165,6 +169,12 @@ const Container = styled.div`
         height: 40px;
       }
 
+      @media only screen and (max-width: 768px) {
+        width: 90%;
+        height: 30px;
+        padding: 0 10px;
+      }
+
       .icon {
         cursor: pointer;
         font-size: 1.5em;
@@ -172,6 +182,10 @@ const Container = styled.div`
 
         @media only screen and (max-width: 1024px) {
           font-size: 1.3em;
+        }
+
+        @media only screen and (max-width: 768px) {
+          font-size: 1.2em;
         }
       }
 
@@ -182,6 +196,10 @@ const Container = styled.div`
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+
+        @media only screen and (max-width: 768px) {
+          width: 85%;
+        }
 
         progress {
           width: 85%;
@@ -201,6 +219,10 @@ const Container = styled.div`
 
         p {
           color: var(--white);
+
+          @media only screen and (max-width: 768px) {
+            margin: 0 10px;
+          }
         }
       }
     }
@@ -224,6 +246,10 @@ const Container = styled.div`
       font-size: 0.9em;
     }
 
+    @media only screen and (max-width: 768px) {
+      width: 95%;
+    }
+
     input {
       width: 100%;
       height: 100%;
@@ -243,6 +269,10 @@ const Container = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
+    @media only screen and (max-width: 768px) {
+      width: 95%;
+    }
 
     .left {
       width: auto;

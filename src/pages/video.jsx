@@ -127,6 +127,10 @@ const Container = styled.div`
       width: 80%;
     }
 
+    @media only screen and (max-width: 768px) {
+      width: 100%;
+    }
+
     video {
       width: 100%;
       border-radius: 10px;
@@ -146,7 +150,14 @@ const Container = styled.div`
       padding: 0 20px;
 
       @media only screen and (max-width: 1024px) {
+        width: 85%;
         height: 40px;
+      }
+
+      @media only screen and (max-width: 768px) {
+        width: 90%;
+        height: 30px;
+        padding: 0 10px;
       }
 
       .icon {
@@ -157,6 +168,10 @@ const Container = styled.div`
         @media only screen and (max-width: 1024px) {
           font-size: 1.3em;
         }
+
+        @media only screen and (max-width: 768px) {
+          font-size: 1.2em;
+        }
       }
 
       .progress {
@@ -166,6 +181,10 @@ const Container = styled.div`
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+
+        @media only screen and (max-width: 768px) {
+          width: 85%;
+        }
 
         progress {
           width: 85%;
@@ -185,6 +204,10 @@ const Container = styled.div`
 
         p {
           color: var(--white);
+
+          @media only screen and (max-width: 768px) {
+            margin: 0 10px;
+          }
         }
       }
     }
@@ -198,6 +221,10 @@ const Container = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
+
+    @media only screen and (max-width: 768px) {
+      width: 95%;
+    }
 
     .button {
       padding: 15px 25px;

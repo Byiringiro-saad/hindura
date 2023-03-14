@@ -188,11 +188,21 @@ const Container = styled.div`
     justify-content: space-between;
     z-index: 1000;
 
+    @media only screen and (max-width: 480px) {
+      flex-direction: column;
+    }
+
     .buttons {
       width: 12%;
       height: auto;
       display: flex;
       flex-direction: column;
+
+      @media only screen and (max-width: 480px) {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+      }
 
       .dark {
         background: var(--box);
@@ -218,6 +228,10 @@ const Container = styled.div`
           height: 35px;
         }
 
+        @media only screen and (max-width: 480px) {
+          width: 30%;
+        }
+
         :hover {
           background: #f85d5d;
         }
@@ -238,6 +252,10 @@ const Container = styled.div`
 
       @media only screen and (max-width: 1024px) {
         width: 80%;
+      }
+
+      @media only screen and (max-width: 480px) {
+        width: 100%;
       }
 
       video {
@@ -267,6 +285,10 @@ const Container = styled.div`
       justify-content: space-between;
       padding: 0 20px;
 
+      @media only screen and (max-width: 480px) {
+        width: 100%;
+      }
+
       .icon {
         cursor: pointer;
         font-size: 1.5em;
@@ -280,6 +302,10 @@ const Container = styled.div`
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+
+        @media only screen and (max-width: 480px) {
+          width: 80%;
+        }
 
         progress {
           width: 85%;
@@ -299,6 +325,10 @@ const Container = styled.div`
 
         p {
           color: var(--white);
+
+          @media only screen and (max-width: 480px) {
+            margin: 0 5px;
+          }
         }
       }
     }

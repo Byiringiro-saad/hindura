@@ -132,6 +132,10 @@ const Container = styled.div`
       padding: 30px 0;
     }
 
+    @media only screen and (max-width: 480px) {
+      width: 100%;
+    }
+
     .header {
       width: 100%;
       height: auto;
@@ -168,6 +172,10 @@ const Container = styled.div`
         width: 70%;
       }
 
+      @media only screen and (max-width: 480px) {
+        width: 90%;
+      }
+
       .file {
         width: 100%;
         height: 50px;
@@ -180,6 +188,10 @@ const Container = styled.div`
         .icon {
           font-size: 3em;
           color: var(--bright);
+
+          @media only screen and (max-width: 480px) {
+            display: none;
+          }
         }
 
         .loader {
@@ -187,6 +199,10 @@ const Container = styled.div`
           height: 100%;
           display: flex;
           flex-direction: column;
+
+          @media only screen and (max-width: 480px) {
+            width: 100%;
+          }
 
           .top {
             width: 100%;
@@ -277,6 +293,16 @@ const Container = styled.div`
       align-items: center;
       justify-content: center;
       border: 2px solid var(--bright);
+
+      @media only screen and (max-width: 1024px) {
+        width: 80%;
+        height: 250px;
+      }
+
+      @media only screen and (max-width: 768px) {
+        width: 80%;
+        height: 200px;
+      }
     }
   }
 `;

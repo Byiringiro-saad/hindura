@@ -57,6 +57,10 @@ const Container = styled.div`
     @media only screen and (max-width: 1024px) {
       width: 30%;
     }
+
+    @media only screen and (max-width: 480px) {
+      width: 60%;
+    }
   }
 
   p {
