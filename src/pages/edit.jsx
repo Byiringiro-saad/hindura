@@ -19,12 +19,24 @@ import {
 //components
 import Background from "../components/background";
 
+//get viewport width
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height,
+  };
+}
+
 const Edit = () => {
   //configs
   const videoRef = useRef(null);
   const navigate = useNavigate();
 
   //local data
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
   const [video, setVideo] = useState(null);
   const [chunk, setChunk] = useState(
     "Donec vitae mi vulputate, suscipit urna in, malesuada nisl. Pellentesque laoreet malesuada nisl. Pellentesque laoree"
@@ -75,6 +87,15 @@ const Edit = () => {
     }
   }, [currentTime]);
 
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <Background>
       <Container>
@@ -123,15 +144,33 @@ const Edit = () => {
             <div className="box">
               <textarea value={chunk} />
             </div>
-            <div className="box">
-              <textarea value={chunk} />
-            </div>
-            <div className="box">
-              <textarea value={chunk} />
-            </div>
-            <div className="box">
-              <textarea value={chunk} />
-            </div>
+            {windowDimensions.width > 480 ? (
+              <>
+                <div className="box">
+                  <textarea value={chunk} />
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+            {windowDimensions.width > 768 ? (
+              <>
+                <div className="box">
+                  <textarea value={chunk} />
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+            {windowDimensions.width > 1024 ? (
+              <>
+                <div className="box">
+                  <textarea value={chunk} />
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="chunks">
             <div className="chunk">
@@ -146,21 +185,45 @@ const Edit = () => {
             <div className="chunk">
               <img src={image} alt="chunk" />
             </div>
-            <div className="chunk">
-              <img src={image} alt="chunk" />
-            </div>
-            <div className="chunk">
-              <img src={image} alt="chunk" />
-            </div>
-            <div className="chunk">
-              <img src={image} alt="chunk" />
-            </div>
-            <div className="chunk">
-              <img src={image} alt="chunk" />
-            </div>
-            <div className="chunk">
-              <img src={image} alt="chunk" />
-            </div>
+            {windowDimensions.width > 480 ? (
+              <>
+                <div className="chunk">
+                  <img src={image} alt="chunk" />
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+            {windowDimensions.width > 768 ? (
+              <>
+                <div className="chunk">
+                  <img src={image} alt="chunk" />
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+            {windowDimensions.width > 1024 ? (
+              <>
+                <div className="chunk">
+                  <img src={image} alt="chunk" />
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+            {windowDimensions.width > 1200 ? (
+              <>
+                <div className="chunk">
+                  <img src={image} alt="chunk" />
+                </div>
+                <div className="chunk">
+                  <img src={image} alt="chunk" />
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </Container>
@@ -173,6 +236,7 @@ const Container = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
+  z-index: 100;
 
   @media only screen and (max-width: 1024px) {
     padding: 20px 0;
@@ -348,6 +412,18 @@ const Container = styled.div`
         background: #170707;
         border-radius: 5px;
 
+        @media only screen and (max-width: 1024px) {
+          width: 32%;
+        }
+
+        @media only screen and (max-width: 768px) {
+          width: 48%;
+        }
+
+        @media only screen and (max-width: 480px) {
+          width: 100%;
+        }
+
         textarea {
           width: 100%;
           height: 100%;
@@ -371,6 +447,30 @@ const Container = styled.div`
       .chunk {
         border-radius: 5px;
         overflow: hidden;
+
+        @media only screen and (max-width: 1024px) {
+          width: 15%;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        @media only screen and (max-width: 768px) {
+          width: 18%;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        @media only screen and (max-width: 480px) {
+          width: 22%;
+
+          img {
+            width: 100%;
+          }
+        }
       }
     }
   }
