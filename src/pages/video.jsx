@@ -9,6 +9,9 @@ import { IoMdVolumeHigh } from "react-icons/io";
 import { RiListSettingsLine } from "react-icons/ri";
 import { BsPlayCircleFill, BsPauseFill } from "react-icons/bs";
 
+//features
+import axios from "../features/axios";
+
 //components
 import Background from "../components/background";
 
@@ -39,7 +42,15 @@ const Video = () => {
   };
 
   const goToGenerating = () => {
-    navigate("/generating");
+    axios
+      .post("/transcribe")
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // navigate("/generating");
   };
 
   window.setInterval(() => {
