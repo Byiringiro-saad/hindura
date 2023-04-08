@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import React, { useEffect, useRef, useState } from "react";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
 //icons
-import { MdEditNote } from "react-icons/md";
 import { IoMdVolumeHigh } from "react-icons/io";
 import { RiListSettingsLine } from "react-icons/ri";
 import { BsPlayCircleFill, BsPauseFill } from "react-icons/bs";
@@ -23,8 +23,10 @@ const Video = () => {
   //local data
   const [video, setVideo] = useState(null);
   const [progress, setProgress] = useState(0);
-  const [videoTime, setVideoTime] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const [videoTime, setVideoTime] = useState(0);
+  const [percentage, setPercentage] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
 
   const file = useSelector((state) => state.file.file);
@@ -42,15 +44,28 @@ const Video = () => {
   };
 
   const goToGenerating = () => {
-    axios
-      .post("/transcribe")
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // navigate("/generating");
+    setLoading(true);
+
+    const data = new FormData();
+    data.append("audio_file", file);
+
+    const req = new XMLHttpRequest();
+
+    req.open("POST", "http://34.135.120.189/transcribe");
+
+    req.upload.addEventListener("progress", (e) => {
+      console.log(e.loaded);
+      const percent = Math.round((e.loaded / e.total) * 100);
+      setPercentage(percent);
+    });
+
+    req.upload.addEventListener("load", (e) => {
+      setLoading(false);
+      console.log(req.status);
+      console.log(req.response);
+    });
+
+    req.send(data);
   };
 
   window.setInterval(() => {
@@ -79,40 +94,61 @@ const Video = () => {
   return (
     <Background>
       <Container>
-        <div className="video">
-          <video id="video" src={video} ref={videoRef}></video>
-          <div className="controlls">
-            {playing ? (
-              <BsPauseFill className="icon" onClick={pauseVideo} />
-            ) : (
-              <BsPlayCircleFill className="icon" onClick={playVideo} />
-            )}
-            <div className="progress">
-              <p className="value">
-                {Math.floor(currentTime / 60) +
-                  ":" +
-                  ("0" + Math.floor(currentTime % 60)).slice(-2)}
-              </p>
-              <progress value={progress} max={100} />
-              <p className="end">
-                {Math.floor(videoTime / 60) +
-                  ":" +
-                  ("0" + Math.floor(videoTime % 60)).slice(-2)}
-              </p>
+        {loading ? (
+          <>
+            <div className="loader">
+              <CircularProgressbar
+                value={percentage}
+                text={`${percentage}%`}
+                strokeWidth={2}
+                styles={buildStyles({
+                  pathColor: "#F06A6A",
+                  trailColor: "#170707",
+                  textColor: "#FFFFFF",
+                  textSize: "7px",
+                })}
+              />
             </div>
-            <IoMdVolumeHigh className="icon" />
-          </div>
-        </div>
-        <div className="buttons">
-          <div className="button" onClick={goToGenerating}>
-            <RiListSettingsLine className="icon" />
-            <p>Generate subtitles</p>
-          </div>
-          {/* <div className="button">
+            <p className="wait">Please Wait...</p>
+          </>
+        ) : (
+          <>
+            <div className="video">
+              <video id="video" src={video} ref={videoRef}></video>
+              <div className="controlls">
+                {playing ? (
+                  <BsPauseFill className="icon" onClick={pauseVideo} />
+                ) : (
+                  <BsPlayCircleFill className="icon" onClick={playVideo} />
+                )}
+                <div className="progress">
+                  <p className="value">
+                    {Math.floor(currentTime / 60) +
+                      ":" +
+                      ("0" + Math.floor(currentTime % 60)).slice(-2)}
+                  </p>
+                  <progress value={progress} max={100} />
+                  <p className="end">
+                    {Math.floor(videoTime / 60) +
+                      ":" +
+                      ("0" + Math.floor(videoTime % 60)).slice(-2)}
+                  </p>
+                </div>
+                <IoMdVolumeHigh className="icon" />
+              </div>
+            </div>
+            <div className="buttons">
+              <div className="button" onClick={goToGenerating}>
+                <RiListSettingsLine className="icon" />
+                <p>Generate subtitles</p>
+              </div>
+              {/* <div className="button">
             <MdEditNote className="icon" />
             <p>Edit subtitles</p>
           </div> */}
-        </div>
+            </div>
+          </>
+        )}
       </Container>
     </Background>
   );
@@ -126,6 +162,10 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 100;
+
+  p.wait {
+    color: var(--white);
+  }
 
   .video {
     width: 95%;

@@ -23,22 +23,7 @@ const Loader = () => {
 
   return (
     <Background>
-      <Container>
-        <div className="loader">
-          <CircularProgressbar
-            value={percentage}
-            text={`${percentage}%`}
-            strokeWidth={2}
-            styles={buildStyles({
-              pathColor: "#F06A6A",
-              trailColor: "#170707",
-              textColor: "#FFFFFF",
-              textSize: "7px",
-            })}
-          />
-        </div>
-        <p>Please Wait...</p>
-      </Container>
+      <Container></Container>
     </Background>
   );
 };
