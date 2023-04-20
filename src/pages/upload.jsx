@@ -91,7 +91,7 @@ const Upload = () => {
             </div>
           ) : (
             <div className="upload" {...getRootProps()}>
-              <input {...getInputProps()} accept="video/*" />
+              <input {...getInputProps()} accept="video/audio/*" />
               <img src={file_video} alt="file_video" />
             </div>
           )}

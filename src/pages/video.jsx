@@ -1,3 +1,4 @@
+import axios from "axios";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
@@ -10,7 +11,6 @@ import { RiListSettingsLine } from "react-icons/ri";
 import { BsPlayCircleFill, BsPauseFill } from "react-icons/bs";
 
 //features
-import axios from "../features/axios";
 
 //components
 import Background from "../components/background";
@@ -49,23 +49,26 @@ const Video = () => {
     const data = new FormData();
     data.append("audio_file", file);
 
-    const req = new XMLHttpRequest();
+    // const req = new XMLHttpRequest();
 
-    req.open("POST", "http://34.135.120.189/transcribe");
+    // req.open("POST", "http://34.133.182.138/transcribe");
 
-    req.upload.addEventListener("progress", (e) => {
-      console.log(e.loaded);
-      const percent = Math.round((e.loaded / e.total) * 100);
-      setPercentage(percent);
+    // req.upload.addEventListener("progress", (e) => {
+    //   console.log(e.loaded);
+    //   const percent = Math.round((e.loaded / e.total) * 100);
+    //   setPercentage(percent);
+    // });
+
+    // req.upload.addEventListener("load", (e) => {
+    //   setLoading(false);
+    //   console.log(req.status);
+    //   console.log(req.response);
+    // });
+
+    // req.send(data);
+    axios.post("http://34.133.182.138/transcribe", data).then((res) => {
+      console.log(res);
     });
-
-    req.upload.addEventListener("load", (e) => {
-      setLoading(false);
-      console.log(req.status);
-      console.log(req.response);
-    });
-
-    req.send(data);
   };
 
   window.setInterval(() => {
